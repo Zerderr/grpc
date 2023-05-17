@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package University;
+option go_package = "./;pb";
+
+service UniversityService {
+  // Создает новую запись
+  rpc CreateUniversity (CreateUniversityRequest) returns (CreateUniversityResponse) {}
+  // Получение списка
+  rpc ListUniversity (GetUniversityRequest) returns (ListUniversityResponse) {}
+  // Удаляет запись по ID
+  rpc DeleteUniversity (DeleteUniversityRequest) returns (DeleteUniversityResponse) {}
+  //
+  rpc UpdateUniversity (UpdateUniversityRequest) returns (UpdateUniversityResponse) {}
+}
+
+message CreateUniversityRequest {
+  string name = 1 ;
+  string facility = 2;
+}
+
+message CreateUniversityResponse {
+  uint64 id = 1;
+}
+
+message GetUniversityRequest {
+  uint64 id = 1;
+}
+
+message University {
+  uint64 id = 1;
+  string name = 2;
+  string facility = 3;
+}
+
+message ListUniversityResponse {
+  University Universities = 1;
+}
+
+message DeleteUniversityRequest {
+  uint64 id = 1;
+}
+
+message DeleteUniversityResponse {
+  bool ok = 2;
+}
+
+message UpdateUniversityRequest {
+  string name =1;
+  string facility = 2;
+}
+
+message UpdateUniversityResponse {
+  bool ok = 2;
+}

@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package University;
+option go_package = "./;pb";
+
+service Service {
+  // Создает новую запись
+  rpc CreateUniversity (CreateUniversityRequest) returns (CreateUniversityResponse) {}
+  // Получение списка
+  rpc ListUniversity (GetUniversityRequest) returns (GetUniversityResponse) {}
+  // Удаляет запись по ID
+  rpc DeleteUniversity (DeleteUniversityRequest) returns (DeleteUniversityResponse) {}
+  // Обновляем по id
+  rpc UpdateUniversity (UpdateUniversityRequest) returns (UpdateUniversityResponse) {}
+
+  // Создает новую запись
+  rpc CreateStudent (CreateStudentRequest) returns (CreateStudentResponse) {}
+  // Получение списка
+  rpc ListStudent (GetStudentRequest) returns (GetStudentResponse) {}
+  // Удаляет запись по ID
+  rpc DeleteStudent (DeleteStudentRequest) returns (DeleteStudentResponse) {}
+  // Обновляем по id
+  rpc UpdateStudent (UpdateStudentRequest) returns (UpdateStudentResponse) {}
+}
+
+message CreateUniversityRequest {
+  string name = 1 ;
+  string facility = 2;
+}
+
+message CreateUniversityResponse {
+  uint64 id = 1;
+}
+
+message GetUniversityRequest {
+  uint64 id = 1;
+}
+
+
+message GetUniversityResponse {
+  uint64 id = 1;
+  string name = 2;
+  string facility = 3;
+}
+
+message DeleteUniversityRequest {
+  uint64 id = 1;
+}
+
+message DeleteUniversityResponse {
+  bool ok = 1;
+}
+
+message UpdateUniversityRequest {
+  uint64 id =1;
+  string facility = 2;
+}
+
+message UpdateUniversityResponse {
+  bool ok = 1;
+}
+
+
+message CreateStudentRequest {
+  string name = 1 ;
+  int32 grades = 2;
+  uint64 univ_id = 3;
+}
+
+message CreateStudentResponse {
+  uint64 id = 1;
+}
+
+message GetStudentRequest {
+  uint64 id = 1;
+}
+
+
+message GetStudentResponse {
+  uint64 id = 1;
+  string name = 2;
+  int32 grades = 3;
+  uint64 univ_id = 4;
+}
+
+message DeleteStudentRequest {
+  uint64 id = 1;
+}
+
+message DeleteStudentResponse {
+  bool ok = 1;
+}
+
+message UpdateStudentRequest {
+  string name =1;
+  uint64 id = 2;
+}
+
+message UpdateStudentResponse {
+  bool ok = 1;
+}

@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  database:
+    image: postgres
+    restart: always
+    env_file: .env
+    ports:
+      - "5432:5432"
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+      - LOG_LEVEL=debug
+  service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file: .env
+    depends_on:
+      - database
+      - jaeger
+    networks:
+      - default
+    ports:
+      - "50051:50051"
